@@ -1,0 +1,42 @@
+version: '3.2'
+services:
+  thesis-one:
+    image: v3ro/thesis-one
+    restart: unless-stopped
+    container_name: 'thesis-one'
+    ports:
+      - 5001:5001
+    networks:
+      - thesis_net
+
+  thesis-two:
+    image: v3ro/thesis-two
+    restart: unless-stopped
+    container_name: 'thesis-two'
+    networks:
+      - thesis_net
+
+  thesis-three:
+    image: v3ro/thesis-three
+    restart: unless-stopped
+    container_name: 'thesis-three'
+    networks:
+      - thesis_net
+
+  thesis-four:
+    image: v3ro/thesis-four
+    restart: unless-stopped
+    container_name: 'thesis-four'
+    networks:
+      - thesis_net
+
+  thesis-five:
+    image: v3ro/thesis-five
+    restart: unless-stopped
+    container_name: 'thesis-five'
+    networks:
+      - thesis_net
+
+networks:
+  thesis_net:
+    driver: bridge
