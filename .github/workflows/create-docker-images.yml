@@ -50,8 +50,8 @@ jobs:
           manifests: |
             k8s/thesis.yaml
           images: |
-            v3ro/thesis-one
-            v3ro/thesis-two
-            v3ro/thesis-three
-            v3ro/thesis-four
-            v3ro/thesis-five
+            v3ro/thesis-one:${{ github.sha }}
+            v3ro/thesis-two:${{ github.sha }}
+            v3ro/thesis-three:${{ github.sha }}
+            v3ro/thesis-four:${{ github.sha }}
+            v3ro/thesis-five:${{ github.sha }}
