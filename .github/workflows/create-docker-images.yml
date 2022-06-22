@@ -25,25 +25,4 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: current
-        arguments: buildAllImages
-        
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-    - name: Push ThesisOne
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/thesis-one:latest
-
-    - name: Push ThesisTwo
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/thesis-two:latest
-      
-    - name: Push ThesisThree
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/thesis-three:latest
-      
-    - name: Push ThesisFour
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/thesis-four:latest
-      
-    - name: Push ThesisFive
-      run: docker image push ${{ secrets.DOCKERHUB_USERNAME }}/thesis-five:latest
+        arguments: buildAndPushAllImages -PDOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} -PDOCKERHUB_PASSWORD=${{ secrets.DOCKERHUB_PASSWORD }}
