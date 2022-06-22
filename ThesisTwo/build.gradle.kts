@@ -11,16 +11,25 @@ dependencies {
 
 jib {
     from {
-        image = "eclipse-temurin:17-jre-alpine"
+        image = "openjdk:17.0.2-oraclelinux8"
+        platforms {
+            platform {
+                architecture = "arm64"
+                os = "linux"
+            }
+        }
     }
     to {
         image = "v3ro/thesis-two"
+        auth {
+            username = findProperty("DOCKERHUB_USERNAME").toString()
+            password = findProperty("DOCKERHUB_PASSWORD").toString()
+        }
     }
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
         args = listOf("--spring.profiles.active=prod")
         ports = listOf("5001")
-        format = com.google.cloud.tools.jib.api.buildplan.ImageFormat.OCI
     }
 }
 

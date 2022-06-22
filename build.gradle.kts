@@ -38,3 +38,11 @@ tasks.register("buildAllImages") {
     dependsOn(":ThesisFour:jibDockerBuild")
     dependsOn(":ThesisFive:jibDockerBuild")
 }
+
+tasks.register("buildAndPushAllImages") {
+    dependsOn(":ThesisOne:jib")
+    dependsOn(":ThesisTwo:jib")
+    dependsOn(":ThesisThree:jib")
+    dependsOn(":ThesisFour:jib")
+    dependsOn(":ThesisFive:jib")
+}
