@@ -26,3 +26,32 @@ jobs:
       with:
         gradle-version: current
         arguments: buildAndPushAllImages -PDOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} -PDOCKERHUB_PASSWORD=${{ secrets.DOCKERHUB_PASSWORD }}
+  deploy:
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set the Kubernetes context
+        uses: azure/k8s-set-context@v2
+        with:
+          method: service-account
+          k8s-url: https://130.162.226.216:16443
+          k8s-secret: ${{ secrets.KUBERNETES_SECRET }}
+
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Deploy to the Kubernetes cluster
+        uses: azure/k8s-deploy@v1
+        with:
+          namespace: cd-thesis
+          manifests: |
+            k8s/thesis.yaml
+          images: |
+            v3ro/thesis-one
+            v3ro/thesis-two
+            v3ro/thesis-three
+            v3ro/thesis-four
+            v3ro/thesis-five
