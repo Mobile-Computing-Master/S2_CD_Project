@@ -21,6 +21,7 @@ jib {
     }
     to {
         image = "v3ro/thesis-one"
+        tags = setOf(findProperty("IMAGE_TAG").toString())
         auth {
             username = findProperty("DOCKERHUB_USERNAME").toString()
             password = findProperty("DOCKERHUB_PASSWORD").toString()
