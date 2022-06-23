@@ -48,11 +48,6 @@ jobs:
           namespace: cd-thesis
           manifests: |
             k8s/thesis.yaml
-          strategy: canary
-          action: deploy
-          traffic-split-method: smi
-          percentage: 20
-          baseline-and-canary-replicas: 1
           images: |
             v3ro/thesis-one:${{ github.sha }}
             v3ro/thesis-two:${{ github.sha }}
