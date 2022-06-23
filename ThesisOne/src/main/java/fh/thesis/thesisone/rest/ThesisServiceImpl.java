@@ -43,7 +43,7 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    @GetMapping("/hash")
+    @GetMapping("/test")
     public ResponseEntity<List<ServiceResponse>> hash(@RequestHeader String originalString, @RequestHeader int difficulty) {
         Flux<ServiceResponse> responseFlux = client
                 .get()
